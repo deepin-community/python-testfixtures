@@ -1,0 +1,66 @@
+From: Michael Fladischer <FladischerMichael@fladi.at>
+Date: Fri, 27 Jan 2017 09:50:38 +0100
+Subject: Use local objects.inv where possible
+
+Upstream uses intersphinx mappings that fetch the objects.inv for python by
+HTTP from a remote host. Using the local objects.inv from python enables the
+package to build without network connection.
+---
+ docs/conf.py | 37 +++++++++++++++++++++++++++++++------
+ 1 file changed, 31 insertions(+), 6 deletions(-)
+
+diff --git a/docs/conf.py b/docs/conf.py
+index eec1474..1732951 100644
+--- a/docs/conf.py
++++ b/docs/conf.py
+@@ -1,6 +1,7 @@
+ # -*- coding: utf-8 -*-
+ import datetime
+ import os
++import sys
+ import time
+ 
+ import pkg_resources
+@@ -13,12 +14,36 @@ extensions = [
+     'sphinx.ext.intersphinx'
+     ]
+ 
+-intersphinx_mapping = {
+-    'python': ('https://docs.python.org/3/', None),
+-    'django': ('https://django.readthedocs.io/en/latest/', None),
+-    'pytest': ('https://docs.pytest.org/en/latest/', None),
+-    'sybil': ('https://sybil.readthedocs.io/en/latest/', None),
+-}
++def check_object_path(key, url, path):
++    if os.path.isfile(path):
++        return {key: (url, path)}
++    return {}
++
++intersphinx_mapping = {}
++intersphinx_mapping.update(check_object_path(
++    'python',
++    'https://docs.python.org/{v}/'.format(
++        v='.'.join(map(str, sys.version_info[0:2]))
++    ),
++    '/usr/share/doc/python{v}/html/objects.inv'.format(
++        v='.'.join(map(str, sys.version_info[0:2]))
++    )
++))
++intersphinx_mapping.update(check_object_path(
++    'django',
++    'https://django.readthedocs.org/en/latest/',
++    '/usr/share/doc/python-django-doc/html/objects.inv'
++))
++intersphinx_mapping.update(check_object_path(
++    'pytest',
++    'https://docs.pytest.org/en/latest/',
++    '/usr/share/doc/python-pytest-doc/html/objects.inv'
++))
++intersphinx_mapping.update(check_object_path(
++    'sybil',
++    'http://sybil.readthedocs.io/en/latest/',
++    '/usr/share/doc/python-sybil-doc/html/objects.inv'
++))
+ 
+ # General
+ source_suffix = '.txt'

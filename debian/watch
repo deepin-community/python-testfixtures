@@ -1,0 +1,4 @@
+version=4
+opts=filenamemangle=s/.*\/([\d\.]+.*)$/python-testfixtures-$1/ \
+https://github.com/simplistix/testfixtures/tags \
+/simplistix/testfixtures/archive.*/([\d\.]+)\.tar\.gz

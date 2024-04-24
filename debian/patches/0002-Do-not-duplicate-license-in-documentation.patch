@@ -1,0 +1,33 @@
+From: Michael Fladischer <FladischerMichael@fladi.at>
+Date: Fri, 27 Jan 2017 09:54:15 +0100
+Subject: Do not duplicate license in documentation.
+
+---
+ docs/index.txt   | 1 -
+ docs/license.txt | 5 -----
+ 2 files changed, 6 deletions(-)
+ delete mode 100644 docs/license.txt
+
+diff --git a/docs/index.txt b/docs/index.txt
+index bac134d..14fa790 100644
+--- a/docs/index.txt
++++ b/docs/index.txt
+@@ -35,7 +35,6 @@ development, please see the sections below:
+    installation.txt
+    development.txt
+    changes.txt
+-   license.txt
+ 
+ Indices and tables
+ ==================
+diff --git a/docs/license.txt b/docs/license.txt
+deleted file mode 100644
+index b383c6e..0000000
+--- a/docs/license.txt
++++ /dev/null
+@@ -1,5 +0,0 @@
+-=======
+-License
+-=======
+-
+-.. literalinclude:: ../LICENSE.txt

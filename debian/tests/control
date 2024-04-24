@@ -1,0 +1,10 @@
+Tests: unittests
+Depends:
+ python3-testfixtures,
+ python3-all,
+ python3-pytest,
+ python3-django,
+ python3-pytest-django,
+ python3-sybil (>= 3.0.0),
+ python3-twisted,
+ python3-zope.component,

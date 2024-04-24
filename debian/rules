@@ -1,4 +1,25 @@
 #!/usr/bin/make -f
 
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export PYBUILD_NAME=testfixtures
+export PYBUILD_TEST_PYTEST=1
+export PYBUILD_TEST_ARGS=--ignore docs/.build
+
 %:
-	dh $@
+	dh $@ --buildsystem=pybuild
+
+override_dh_auto_build:
+	dh_auto_build
+ifeq (,$(findstring nodoc,$(DEB_BUILD_PROFILES)))
+	PYTHONPATH=. python3 -m sphinx -b html -d docs/.build/.doctrees -N docs docs/.build/html
+endif
+
+override_dh_clean:
+	rm -rf docs/.build
+	dh_clean
+
+override_dh_installdocs:
+	dh_installdocs -ppython-testfixtures-doc --doc-main-package=python3-testfixtures
+	dh_installdocs --remaining-packages

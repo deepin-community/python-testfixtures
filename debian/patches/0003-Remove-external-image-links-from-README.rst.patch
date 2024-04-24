@@ -1,0 +1,26 @@
+From: Andrey Rahmatullin <wrar@debian.org>
+Date: Sat, 9 Oct 2021 21:29:45 +0500
+Subject: Remove external image links from README.rst.
+
+---
+ README.rst | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/README.rst b/README.rst
+index 5b19d55..9b23b57 100644
+--- a/README.rst
++++ b/README.rst
+@@ -1,12 +1,10 @@
+ Testfixtures
+ ============
+ 
+-|CircleCI|_ |Docs|_
++CircleCI_ Docs_
+ 
+-.. |CircleCI| image:: https://circleci.com/gh/simplistix/testfixtures/tree/master.svg?style=shield
+ .. _CircleCI: https://circleci.com/gh/simplistix/testfixtures/tree/master
+ 
+-.. |Docs| image:: https://readthedocs.org/projects/testfixtures/badge/?version=latest
+ .. _Docs: http://testfixtures.readthedocs.org/en/latest/
+ 
+ Testfixtures is a collection of helpers and mock objects that are useful when
